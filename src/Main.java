@@ -1,8 +1,9 @@
 import transport.Car;
+import transport.Train;
 
 import java.time.LocalDate;
 
-public class Main {
+public abstract class Main {
 
     public static void main(String[] args) {
         int currentYear = 2022;
@@ -56,15 +57,26 @@ public class Main {
         printCostOfFlowers(rosa, rosa, rosa,
                 chrysanthemum, chrysanthemum, chrysanthemum, chrysanthemum, chrysanthemum,
                 gypsophila);
-    }
+        System.out.println(" ");
 
+
+        Train Lastochka = new Train("Ласточка", "И-901", 2011, "Россия", "", 301,
+                3500f, 0, "Белорусский вокзал", "станция Минск-Пассажирский",
+                11);
+        Train Leningrad = new Train("Ленинград", "D-125", 2019, "Россия", "", 270,
+                1700f, 0, "Ленинградский вокзал", "станция Ленинград-Пассажирский", 8);
+        printInfo(Lastochka);
+        printInfo(Leningrad);
+
+
+    }
 
     private static void printInfo(Flower flower) {
         System.out.println("Цвет: " + flower.getFlowerColor() + ", страна происхождения: " + flower.getCountry() +
                 ", стоимость за штуку: " + flower.getCost() + " рублей , срок стояния: " + flower.lifeSpan + " дней");
     }
 
-    private static Object printCostOfFlowers(Flower... flowers) {
+    private static void printCostOfFlowers(Flower... flowers) {
         double costOfBouquet = 0;
         int minimumLifespan = Integer.MAX_VALUE;
         for (Flower flower : flowers) {
@@ -78,7 +90,6 @@ public class Main {
         costOfBouquet = costOfBouquet * 1.1;
         System.out.println("Стоимость букета: " + costOfBouquet + " рублей.");
         System.out.println("Срок стояния букета: " + minimumLifespan + " дней.");
-        return null;
     }
 
     private static void printInfo(Car car) {
@@ -100,7 +111,24 @@ public class Main {
 
 
     }
+
+    private static void printInfo(Train train) {
+        System.out.println( train.getBrand() + " " + train.getModel() +
+                ", год выпуска - " + train.getYear() +
+                ", сборка -  " + train.getCountry() +
+                ",  цвет - " + train.getColor() +
+                ",  скорость передвижения " +
+                train.getMaxSpeed() +
+                ", цена поездки - " + train.getPriceOfTheTrip() +
+                ", время поездки - " + train.getTimeOfTheTrip() +
+                ",станция отправления - " + train.getDepartureStation() +
+                ", конечная остановка - " + train.getFinalStop() +
+                ", количество вагонов - " + train.getNumberOfWagons());
+    }
+
 }
+
+
 
 
 

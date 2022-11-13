@@ -3,13 +3,7 @@ package transport;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Car {
-
-    private final String brand;
-    private final String model;
-    private final int year;
-    private final String country;
-    private String color;
+public class Car extends Transport {
     private double engineVolume;
     private String transmission;
     private String typeOfBody;
@@ -19,18 +13,9 @@ public class Car {
     private Key key;
     private Insurance insurance;
 
-    public Car(String brand, String model, int year, String country, String color, double engineVolume,
-               String transmission, String typeOfBody, String regNumber, int seatsCount, boolean summerTires,
-               Key key, Insurance insurance) {
-        this.brand = Objects.requireNonNullElse(brand, "default");
-        this.model = Objects.requireNonNullElse(model, "default");
-        if (year <= 0) {
-            this.year = 2000;
-        } else {
-            this.year = year;
-        }
-        this.country = Objects.requireNonNullElse(country, "default");
-        this.color = Objects.requireNonNullElse(color, "белый");
+    public Car(String brand, String model, int year, String country, String color, double engineVolume) {
+        super(brand,  model, year,  country,  color);
+
         if (engineVolume <= 0) {
             this.engineVolume = 1.5;
         } else {
@@ -55,42 +40,17 @@ public class Car {
 
     }
 
-    public Car(String brand, String model, int year, String country, String color, double engineVolume) {
-        this(brand, model, year, country, color, engineVolume,
-                "АКПП", "седан", "x000xx000", 5, false, new Key(), new Insurance());
+
+    public Car(String brand, String model, int year, String country, String color, int maxSpeed, double engineVolume) {
+        this(brand, model, year, country, color, engineVolume)  ;
     }
-
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
+    
     public String getTypeOfBody() {
         return typeOfBody;
     }
 
     public int getSeatsCount() {
         return seatsCount;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public double getEngineVolume() {
@@ -129,6 +89,7 @@ public class Car {
         summerTires = !summerTires;
     }
 
+
     public Key getKey() {
         return key;
     }
@@ -156,6 +117,7 @@ public class Car {
         return Character.isDigit(chars[1]) && Character.isDigit(chars[2]) && Character.isDigit(chars[3])
                 && Character.isDigit(chars[6]) && Character.isDigit(chars[7]) && Character.isDigit(chars[8]);
     }
+
 
     public static class Key {
         private final boolean remoteRunEngine;
