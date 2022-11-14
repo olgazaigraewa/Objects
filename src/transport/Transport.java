@@ -2,7 +2,7 @@ package transport;
 
 import java.util.Objects;
 
-public class Transport {
+public abstract class  Transport {
     private String brand;
     private String model;
     private int year;
@@ -10,6 +10,7 @@ public class Transport {
     private String color;
     private int maxSpeed;
 
+    public abstract void refill();
     public Transport(String brand, String model, int year, String country, String color) {
         this.brand = Objects.requireNonNullElse(brand, "default");
         this.model = Objects.requireNonNullElse(model, "default");
@@ -24,21 +25,27 @@ public class Transport {
         } else {
             this.color = color;
         }
-        if (maxSpeed > 0) {
-            this.maxSpeed = maxSpeed;
-        } else {
-            this.maxSpeed = Math.abs(maxSpeed);
-            this.maxSpeed = maxSpeed;
-        }
+        this.maxSpeed = Math.max(maxSpeed, 0);
     }
 
     public Transport(String brand, String model, int year, String country, String color, int maxSpeed) {
-
+        this.brand = Objects.requireNonNullElse(brand, "default");
+        this.model = Objects.requireNonNullElse(model, "default");
+        if (year <= 0) {
+            this.year = 2000;
+        } else {
+            this.year = year;
+        }
+        this.country = Objects.requireNonNullElse(country, "default");
+        if (color == null) {
+            this.color = "белый";
+        } else {
+            this.color = color;
+        }
+        this.maxSpeed = Math.max(maxSpeed, 0);
     }
 
-    public void transport(String s) {
-        System.out.println(maxSpeed);
-    }
+
 
     public String getBrand() {
         return brand;
@@ -73,12 +80,7 @@ public class Transport {
     }
 
     public void setMaxSpeed(int maxSpeed) {
-        if (maxSpeed > 0) {
-            this.maxSpeed = maxSpeed;
-        } else {
-            this.maxSpeed = Math.abs(maxSpeed);
-            this.maxSpeed = maxSpeed;
-        }
+        this.maxSpeed = Math.max(maxSpeed, 0);
     }
 
     public static void printInfo(Transport transport) {

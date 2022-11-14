@@ -12,23 +12,11 @@ public class Train extends Transport {
     public Train(String brand, String model, int year, String country, String color, int maxSpeed, float priceOfTheTrip,
                  float timeOfTheTrip, String departureStation, String finalStop, int numberOfWagons) {
         super(brand, model, year, country, color, maxSpeed);
-        if (priceOfTheTrip > 0) {
-        } else {
-            this.priceOfTheTrip = Math.abs(priceOfTheTrip);
-            this.priceOfTheTrip = priceOfTheTrip;
-        }
-        if (timeOfTheTrip > 0) {
-        } else {
-            this.timeOfTheTrip = Math.abs(timeOfTheTrip);
-            this.timeOfTheTrip = timeOfTheTrip;
-        }
+        this.timeOfTheTrip = Math.max(timeOfTheTrip, 0);
+        this.priceOfTheTrip = Math.max(priceOfTheTrip, 0);
         this.departureStation = Objects.requireNonNullElse(departureStation, "default");
         this.finalStop = Objects.requireNonNullElse(finalStop, "default");
-        if (numberOfWagons > 0) {
-        } else {
-            this.numberOfWagons = Math.abs(numberOfWagons);
-            this.numberOfWagons = numberOfWagons;
-        }
+        this.numberOfWagons = Math.max(numberOfWagons, 0);
     }
 
     public float getPriceOfTheTrip() {
@@ -36,11 +24,7 @@ public class Train extends Transport {
     }
 
     public void setPriceOfTheTrip(float priceOfTheTrip) {
-        if (priceOfTheTrip > 0) {
-        } else {
-            this.priceOfTheTrip = Math.abs(priceOfTheTrip);
-            this.priceOfTheTrip = priceOfTheTrip;
-        }
+        this.priceOfTheTrip = Math.max(priceOfTheTrip, 0);
     }
 
     public float getTimeOfTheTrip() {
@@ -48,11 +32,7 @@ public class Train extends Transport {
     }
 
     public void setTimeOfTheTrip(float timeOfTheTrip) {
-        if (timeOfTheTrip > 0) {
-        } else {
-            this.timeOfTheTrip = Math.abs(timeOfTheTrip);
-            this.timeOfTheTrip = timeOfTheTrip;
-        }
+        this.timeOfTheTrip = Math.max(timeOfTheTrip, 0);
     }
 
     public String getDepartureStation() {
@@ -76,29 +56,15 @@ public class Train extends Transport {
     }
 
     public void setNumberOfWagons(int numberOfWagons) {
-        if (numberOfWagons > 0) {
-        } else {
-            this.numberOfWagons = Math.abs(numberOfWagons);
-            this.numberOfWagons = numberOfWagons;
-        }
+        this.numberOfWagons = Math.max(numberOfWagons, 0);
 
     }
 
 
     @Override
-    public String toString() {
-        return getBrand() + " " + getModel() +
-                ", год выпуска - " + getYear() +
-                ", сборка -  " + getCountry() +
-                ",  цвет - " + getColor() +
-                ",  скорость передвижения " + getMaxSpeed() +
-                ", цена поездки - " + getPriceOfTheTrip() +
-                ", время поездки - " + getTimeOfTheTrip() +
-                ",станция отправления - " + getDepartureStation() +
-                ", конечная остановка - " + getFinalStop() +
-                ", количество вагонов - " + getNumberOfWagons();
+    public void refill() {
+        System.out.println("Поезд заправлять дизелем.");
     }
-
 }
 
 

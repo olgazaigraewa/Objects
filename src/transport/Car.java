@@ -21,16 +21,8 @@ public class Car extends Transport {
         } else {
             this.engineVolume = engineVolume;
         }
-        if (key == null) {
-            this.key = new Key();
-        } else {
-            this.key = key;
-        }
-        if (insurance == null) {
-            this.insurance = new Insurance();
-        } else {
-            this.insurance = insurance;
-        }
+        this.key = Objects.requireNonNullElseGet(key, Key::new);
+        this.insurance = Objects.requireNonNullElseGet(insurance, Insurance::new);
 
         this.transmission = "АКПП";
         this.typeOfBody = "седан";
@@ -44,7 +36,9 @@ public class Car extends Transport {
     public Car(String brand, String model, int year, String country, String color, int maxSpeed, double engineVolume) {
         this(brand, model, year, country, color, engineVolume)  ;
     }
-    
+
+
+
     public String getTypeOfBody() {
         return typeOfBody;
     }
@@ -116,6 +110,11 @@ public class Car extends Transport {
         }
         return Character.isDigit(chars[1]) && Character.isDigit(chars[2]) && Character.isDigit(chars[3])
                 && Character.isDigit(chars[6]) && Character.isDigit(chars[7]) && Character.isDigit(chars[8]);
+    }
+
+    @Override
+    public void refill() {
+        System.out.println("Автомобиль заправлять бензином, дизелем на заправке или заряжать на специальных электро-парковках, если это электрокар.");
     }
 
 

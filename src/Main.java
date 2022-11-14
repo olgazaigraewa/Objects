@@ -1,5 +1,7 @@
+import transport.Bus;
 import transport.Car;
 import transport.Train;
+import transport.Transport;
 
 import java.time.LocalDate;
 
@@ -44,6 +46,9 @@ public abstract class Main {
         printInfo(bmw);
         printInfo(kia);
         printInfo(hyundai);
+
+
+
         System.out.println(" ");
 
         Flower rosa = new Flower(null, "Голландия", 35.59, 0);
@@ -60,15 +65,30 @@ public abstract class Main {
         System.out.println(" ");
 
 
-        Train Lastochka = new Train("Ласточка", "И-901", 2011, "Россия", "", 301,
+        Train Lastochka = new Train("Ласточка", "И-901", 2011, "Россия", null, 301,
                 3500f, 0, "Белорусский вокзал", "станция Минск-Пассажирский",
                 11);
-        Train Leningrad = new Train("Ленинград", "D-125", 2019, "Россия", "", 270,
-                1700f, 0, "Ленинградский вокзал", "станция Ленинград-Пассажирский", 8);
+        Train Leningrad = new Train("Ленинград", "D-125", 2019, "Россия", null, 270,
+                1700f, 0, "Ленинградский вокзал",
+                "станция Ленинград-Пассажирский", 8);
         printInfo(Lastochka);
         printInfo(Leningrad);
+        System.out.println(" ");
 
+        Bus mersedes = new Bus("Mersedes", "Citaco", 2019, "Германия", " жёлтый",
+                160, 50, 191,32);
+        Bus volvo = new Bus("Volvo", "8900", 2018, "Швеция", " синий",
+                160, 50, 27,57);
+        Bus man = new Bus("Man", "City", 2020, "Польша", " белый",
+                160, 50, 295,57);
+        printInfo(mersedes);
+        printInfo(volvo);
+        printInfo(man);
 
+        System.out.println(" ");
+        lada.refill();
+        Lastochka.refill();
+        mersedes.refill();
     }
 
     private static void printInfo(Flower flower) {
@@ -125,6 +145,18 @@ public abstract class Main {
                 ", конечная остановка - " + train.getFinalStop() +
                 ", количество вагонов - " + train.getNumberOfWagons());
     }
+    private  static void printInfo(Bus bus) {
+        System.out.println( bus.getBrand() + " " + bus.getModel() +
+                ", год выпуска - " + bus.getYear() +
+                ", сборка -  " + bus.getCountry() +
+                ", цвет - " + bus.getColor() +
+                ", скорость передвижения " +  bus.getMaxSpeed() +
+                ", цена поездки - " + bus.getPriceOfTheTrip() +
+                ", номер маршрута - " + bus.getRouteNumber() +
+                ", количество мест - " + bus.getSeatsCount());
+
+    }
+
 
 }
 
