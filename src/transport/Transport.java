@@ -10,7 +10,15 @@ public abstract class  Transport {
     private String color;
     private int maxSpeed;
 
+
+
     public abstract void refill();
+
+    public abstract void startMoving ();
+
+    public abstract void finishMoving ();
+
+
     public Transport(String brand, String model, int year, String country, String color) {
         this.brand = Objects.requireNonNullElse(brand, "default");
         this.model = Objects.requireNonNullElse(model, "default");
@@ -83,14 +91,8 @@ public abstract class  Transport {
         this.maxSpeed = Math.max(maxSpeed, 0);
     }
 
-    public static void printInfo(Transport transport) {
-        System.out.println(transport.getBrand() + " " + transport.getModel() +
-                ", год выпуска - " + transport.getYear() +
-                ", сборка -  " + transport.getCountry() +
-                ",  цвет - " + transport.getColor() +
-                ",  скорость передвижения " +
-                transport.getMaxSpeed());
-    }
+    public  abstract void printInfo();
+
 }
 
 

@@ -12,8 +12,9 @@ public class Car extends Transport {
     private boolean summerTires;
     private Key key;
     private Insurance insurance;
+    private String fuelType;
 
-    public Car(String brand, String model, int year, String country, String color, double engineVolume) {
+    public Car(String brand, String model, int year, String country, String color, double engineVolume, String fuelType) {
         super(brand,  model, year,  country,  color);
 
         if (engineVolume <= 0) {
@@ -29,12 +30,14 @@ public class Car extends Transport {
         this.regNumber = "x000xx000";
         this.seatsCount = 5;
         this.summerTires = false;
+        this.fuelType = Objects.requireNonNullElse(fuelType, "default");
 
     }
 
 
-    public Car(String brand, String model, int year, String country, String color, int maxSpeed, double engineVolume) {
-        this(brand, model, year, country, color, engineVolume)  ;
+    public Car(String brand, String model, int year, String country, String color, int maxSpeed,
+               double engineVolume, String fuelType ) {
+        this(brand, model, year, country, color, engineVolume,fuelType )  ;
     }
 
 
@@ -76,7 +79,23 @@ public class Car extends Transport {
     }
 
     public void setSummerTires(boolean summerTires) {
-        this.summerTires = Objects.requireNonNullElse(summerTires, true);
+        this.summerTires = Objects.requireNonNullElse(summerTires, false);
+    }
+
+    public void setTypeOfBody(String typeOfBody) {
+        this.typeOfBody = Objects.requireNonNullElse(typeOfBody, "седан");
+    }
+
+    public void setSeatsCount(int seatsCount) {
+        this.seatsCount = Objects.requireNonNullElse(seatsCount, 5);
+    }
+
+    public String getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(String fuelType) {
+        this.fuelType = Objects.requireNonNullElse(fuelType, "default");
     }
 
     public void changeTires() {
@@ -112,9 +131,25 @@ public class Car extends Transport {
                 && Character.isDigit(chars[6]) && Character.isDigit(chars[7]) && Character.isDigit(chars[8]);
     }
 
+
     @Override
     public void refill() {
         System.out.println("Автомобиль заправлять бензином, дизелем на заправке или заряжать на специальных электро-парковках, если это электрокар.");
+    }
+
+    @Override
+    public void startMoving() {
+
+    }
+
+    @Override
+    public void finishMoving() {
+
+    }
+
+    @Override
+    public void printInfo() {
+
     }
 
 
@@ -183,7 +218,42 @@ public class Car extends Transport {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Car)) return false;
+        Car car = (Car) o;
+        return Double.compare(car.getEngineVolume(), getEngineVolume()) == 0 && getSeatsCount() == car.getSeatsCount() &&
+                isSummerTires() == car.isSummerTires() && getTransmission().equals(car.getTransmission()) &&
+                getTypeOfBody().equals(car.getTypeOfBody()) && getRegNumber().equals(car.getRegNumber()) &&
+                getKey().equals(car.getKey()) && getInsurance().equals(car.getInsurance()) && getFuelType().equals(car.getFuelType());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getEngineVolume(), getTransmission(), getTypeOfBody(), getRegNumber(), getSeatsCount(),
+                isSummerTires(), getKey(), getInsurance(), getFuelType());
+    }
+    private static void printInfo(Car car) {
+        System.out.println(
+                car.getBrand() + " " + car.getModel() +
+                        ", год выпуска - " + car.getYear() + ", сборка -  " + car.getCountry() +
+                        ",  цвет - " + car.getColor() +
+                        ", объем двигателя -  " + car.getEngineVolume() +
+                        " литров, коробка передач - " + car.getTransmission() +
+                        ", тип кузова - " + car.getTypeOfBody() +
+                        ", регистрационный номер - " + car.getRegNumber() +
+                        ", количество мест - " + car.getSeatsCount() +
+                        " , " + (car.isSummerTires() ? "летняя" : "зимняя") + " резина " +
+                        ",  " + (car.getKey().isKeylessAccess() ? "доступ без ключа " : "доступ с ключом") +
+                        ",  " + (car.getKey().isRemoteRunEngine() ? "удаленный запуск " : "обычный запуск") +
+                        ", номер страховки - " + car.getInsurance().getNumber() +
+                        ", стоимость страховки - " + car.getInsurance().getCost() +
+                        ", срок действия страховки - " + car.getInsurance().getExpireDate() +
+                        ", тип топлива - " + car.getFuelType());
+
+
+    }
 }
 
 

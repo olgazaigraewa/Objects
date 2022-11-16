@@ -2,6 +2,7 @@ import java.util.Objects;
 
 public class Flower {
 
+
     private String flowerColor;
     private String country;
     private double cost;
@@ -42,4 +43,25 @@ public class Flower {
     public void setCost(double cost) {
         this.cost = Math.max(cost, 1);
     }
+
+    public static void printCostOfFlowers(Flower... flowers) {
+        double costOfBouquet = 0;
+        int minimumLifespan = Integer.MAX_VALUE;
+        for (Flower flower : flowers) {
+            if (flower.lifeSpan < minimumLifespan) {
+                minimumLifespan = flower.lifeSpan;
+
+            }
+            costOfBouquet += flower.getCost();
+
+        }
+        costOfBouquet = costOfBouquet * 1.1;
+        System.out.println("Стоимость букета: " + costOfBouquet + " рублей.");
+        System.out.println("Срок стояния букета: " + minimumLifespan + " дней.");
+    }
+    private static void printInfo(Flower flower) {
+        System.out.println("Цвет: " + flower.getFlowerColor() + ", страна происхождения: " + flower.getCountry() +
+                ", стоимость за штуку: " + flower.getCost() + " рублей , срок стояния: " + flower.lifeSpan + " дней");
+    }
 }
+
