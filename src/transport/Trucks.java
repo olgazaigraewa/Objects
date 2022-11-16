@@ -24,7 +24,7 @@ public class Trucks extends Transport {
 
 
     public Trucks(String brand, String model, int year, String country, String color, int maxSpeed, double engineVolume, String fuelType) {
-        super(brand, model, year, country, color, maxSpeed);
+        super(brand, model, year, country, color);
         if (engineVolume <= 0) {
             this.engineVolume = 5.5;
         } else {

@@ -11,7 +11,7 @@ public class Bus extends Transport{
 
     public Bus(String brand, String model, int year, String country, String color, int maxSpeed,
                float priceOfTheTrip, int routeNumber, int seatsCount, double engineVolume, String fuelType) {
-        super(brand,  model, year,  country,  color, maxSpeed);
+        super(brand, model, year, country, color);
         this.priceOfTheTrip = Math.max(priceOfTheTrip, 0);
         this.routeNumber = Math.max(routeNumber, 0);
         this.seatsCount = Math.max(seatsCount, 0);
@@ -82,10 +82,7 @@ public class Bus extends Transport{
 
     }
 
-    @Override
-    public void printInfo() {
 
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -101,19 +98,22 @@ public class Bus extends Transport{
     public int hashCode() {
         return Objects.hash(getPriceOfTheTrip(), getRouteNumber(), getSeatsCount(), getEngineVolume(), getFuelType());
     }
-    private static void printInfo(Bus bus) {
-        System.out.println(bus.getBrand() + " " + bus.getModel() +
-                ", год выпуска - " + bus.getYear() +
-                ", сборка -  " + bus.getCountry() +
-                ", цвет - " + bus.getColor() +
-                ", скорость передвижения " + bus.getMaxSpeed() +
-                ", цена поездки - " + bus.getPriceOfTheTrip() +
-                ", номер маршрута - " + bus.getRouteNumber() +
-                ", количество мест - " + bus.getSeatsCount() +
-                ", объем двигателя - " + bus.getEngineVolume() +
-                ", тип топлива - " + bus.getFuelType());
+    @Override
+    public void printInfo() {
+        System.out.println(getBrand() + " " +getModel() +
+                ", год выпуска - " +getYear() +
+                ", сборка -  " + getCountry() +
+                ", цвет - " + getColor() +
+                ", скорость передвижения " + getMaxSpeed() +
+                ", цена поездки - " + getPriceOfTheTrip() +
+                ", номер маршрута - " + getRouteNumber() +
+                ", количество мест - " + getSeatsCount() +
+                ", объем двигателя - " + getEngineVolume() +
+                ", тип топлива - " + getFuelType());
 
     }
+
+
 }
 
 

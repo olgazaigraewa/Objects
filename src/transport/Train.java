@@ -12,7 +12,7 @@ public class Train extends Transport {
 
     public Train(String brand, String model, int year, String country, String color, int maxSpeed, float priceOfTheTrip,
                  float timeOfTheTrip, String departureStation, String finalStop, int numberOfWagons, String fuelType) {
-        super(brand, model, year, country, color, maxSpeed);
+        super();
         this.timeOfTheTrip = Math.max(timeOfTheTrip, 0);
         this.priceOfTheTrip = Math.max(priceOfTheTrip, 0);
         this.departureStation = Objects.requireNonNullElse(departureStation, "default");

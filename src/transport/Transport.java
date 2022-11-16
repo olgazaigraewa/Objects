@@ -36,7 +36,7 @@ public abstract class  Transport {
         this.maxSpeed = Math.max(maxSpeed, 0);
     }
 
-    public Transport(String brand, String model, int year, String country, String color, int maxSpeed) {
+    public Transport() {
         this.brand = Objects.requireNonNullElse(brand, "default");
         this.model = Objects.requireNonNullElse(model, "default");
         if (year <= 0) {

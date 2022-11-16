@@ -14,16 +14,16 @@ public class Car extends Transport {
     private Insurance insurance;
     private String fuelType;
 
-    public Car(String brand, String model, int year, String country, String color, double engineVolume, String fuelType) {
-        super(brand,  model, year,  country,  color);
+    public Car(String brand, String model, int year, String country, String color, double engineVolume, String fuelType ) {
+        super(brand, model, year, country, color);
 
         if (engineVolume <= 0) {
             this.engineVolume = 1.5;
         } else {
             this.engineVolume = engineVolume;
         }
-        this.key = Objects.requireNonNullElseGet(key, Key::new);
-        this.insurance = Objects.requireNonNullElseGet(insurance, Insurance::new);
+        this.key = Objects.requireNonNullElseGet(null, Key::new);
+        this.insurance = Objects.requireNonNullElseGet(null, Insurance::new);
 
         this.transmission = "АКПП";
         this.typeOfBody = "седан";
@@ -34,13 +34,10 @@ public class Car extends Transport {
 
     }
 
-
     public Car(String brand, String model, int year, String country, String color, int maxSpeed,
-               double engineVolume, String fuelType ) {
-        this(brand, model, year, country, color, engineVolume,fuelType )  ;
+               double engineVolume, String fuelType) {
+        this(brand, model, year, country, color, engineVolume, fuelType);
     }
-
-
 
     public String getTypeOfBody() {
         return typeOfBody;
@@ -131,51 +128,6 @@ public class Car extends Transport {
                 && Character.isDigit(chars[6]) && Character.isDigit(chars[7]) && Character.isDigit(chars[8]);
     }
 
-
-    @Override
-    public void refill() {
-        System.out.println("Автомобиль заправлять бензином, дизелем на заправке или заряжать на специальных электро-парковках, если это электрокар.");
-    }
-
-    @Override
-    public void startMoving() {
-
-    }
-
-    @Override
-    public void finishMoving() {
-
-    }
-
-    @Override
-    public void printInfo() {
-
-    }
-
-
-    public static class Key {
-        private final boolean remoteRunEngine;
-        private final boolean keylessAccess;
-
-        public Key(boolean remoteRunEngine, boolean keylessAccess) {
-            this.remoteRunEngine = remoteRunEngine;
-            this.keylessAccess = keylessAccess;
-        }
-
-        public Key() {
-            this(false, false);
-        }
-
-        public boolean isRemoteRunEngine() {
-            return remoteRunEngine;
-        }
-
-        public boolean isKeylessAccess() {
-            return keylessAccess;
-        }
-
-    }
-
     public static class Insurance {
         private LocalDate expireDate;
         private final double cost;
@@ -217,6 +169,55 @@ public class Car extends Transport {
             }
         }
     }
+    public static class Key {
+        private boolean remoteRunEngine;
+        private boolean keylessAccess;
+
+        public Key(boolean remoteRunEngine, boolean keylessAccess) {
+            this.remoteRunEngine = remoteRunEngine;
+            this.keylessAccess = keylessAccess;
+        }
+
+        public Key() {
+            this(false, false);
+        }
+
+        public boolean isRemoteRunEngine() {
+            return remoteRunEngine;
+        }
+
+        public boolean isKeylessAccess() {
+            return keylessAccess;
+        }
+
+        public void isRemoteRunEngine(boolean remoteRunEngine) {
+            this.remoteRunEngine = remoteRunEngine;
+        }
+
+        public void isKeylessAccess(boolean keylessAccess) {
+            this.keylessAccess = keylessAccess;
+        }
+    }
+
+
+    @Override
+    public void refill() {
+        System.out.println("Автомобиль заправлять бензином, дизелем на заправке " +
+                "или заряжать на специальных электро-парковках, если это электрокар.");
+    }
+
+    @Override
+    public void startMoving() {
+
+    }
+
+    @Override
+    public void finishMoving() {
+
+    }
+
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -229,32 +230,39 @@ public class Car extends Transport {
                 getKey().equals(car.getKey()) && getInsurance().equals(car.getInsurance()) && getFuelType().equals(car.getFuelType());
     }
 
+
     @Override
-    public int hashCode() {
-        return Objects.hash(getEngineVolume(), getTransmission(), getTypeOfBody(), getRegNumber(), getSeatsCount(),
-                isSummerTires(), getKey(), getInsurance(), getFuelType());
+        public int hashCode() {
+            return Objects.hash(getEngineVolume(), getTransmission(), getTypeOfBody(), getRegNumber(), getSeatsCount(),
+                    isSummerTires(), getKey(), getInsurance(), getFuelType());
     }
-    private static void printInfo(Car car) {
-        System.out.println(
-                car.getBrand() + " " + car.getModel() +
-                        ", год выпуска - " + car.getYear() + ", сборка -  " + car.getCountry() +
-                        ",  цвет - " + car.getColor() +
-                        ", объем двигателя -  " + car.getEngineVolume() +
-                        " литров, коробка передач - " + car.getTransmission() +
-                        ", тип кузова - " + car.getTypeOfBody() +
-                        ", регистрационный номер - " + car.getRegNumber() +
-                        ", количество мест - " + car.getSeatsCount() +
-                        " , " + (car.isSummerTires() ? "летняя" : "зимняя") + " резина " +
-                        ",  " + (car.getKey().isKeylessAccess() ? "доступ без ключа " : "доступ с ключом") +
-                        ",  " + (car.getKey().isRemoteRunEngine() ? "удаленный запуск " : "обычный запуск") +
-                        ", номер страховки - " + car.getInsurance().getNumber() +
-                        ", стоимость страховки - " + car.getInsurance().getCost() +
-                        ", срок действия страховки - " + car.getInsurance().getExpireDate() +
-                        ", тип топлива - " + car.getFuelType());
+
+    @Override
+        public void printInfo() {
+        System.out.println(getBrand() + " " + getModel() +
+                ", год выпуска - " + getYear() +
+                ", сборка -  " + getCountry() +
+                ",  цвет - " + getColor() +
+                ", объем двигателя -  " + getEngineVolume() +
+                " литров, коробка передач - " + getTransmission() +
+                ", тип кузова - " + getTypeOfBody() +
+                ", регистрационный номер - " + getRegNumber() +
+                ", количество мест - " + getSeatsCount() +
+                " , " + (isSummerTires() ? "летняя" : "зимняя") + " резина " +
+                ",  " + (getKey().isKeylessAccess() ? "доступ без ключа " : "доступ с ключом") +
+                ",  " + (getKey().isRemoteRunEngine() ? "удаленный запуск " : "обычный запуск") +
+                ", номер страховки - " + getInsurance().getNumber() +
+                ", стоимость страховки - " + getInsurance().getCost() +
+                ", срок действия страховки - " + getInsurance().getExpireDate() +
+                ", тип топлива - " + getFuelType());
+    }
+
+
 
 
     }
-}
+
+
 
 
 
