@@ -12,7 +12,7 @@ public class Train extends Transport {
 
     public Train(String brand, String model, int year, String country, String color, int maxSpeed, float priceOfTheTrip,
                  float timeOfTheTrip, String departureStation, String finalStop, int numberOfWagons, String fuelType) {
-        super();
+        super(brand, model, year, country, color);
         this.timeOfTheTrip = Math.max(timeOfTheTrip, 0);
         this.priceOfTheTrip = Math.max(priceOfTheTrip, 0);
         this.departureStation = Objects.requireNonNullElse(departureStation, "default");
@@ -85,10 +85,6 @@ public class Train extends Transport {
 
     }
 
-    @Override
-    public void printInfo() {
-
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -106,23 +102,25 @@ public class Train extends Transport {
         return Objects.hash(getPriceOfTheTrip(), getTimeOfTheTrip(), getDepartureStation(), getFinalStop(),
                 getNumberOfWagons(), getFuelType());
     }
-    private static void printInfo(Train train) {
 
-        System.out.println(train.getBrand() + " " + train.getModel() +
-                ", год выпуска - " + train.getYear() +
-                ", сборка -  " + train.getCountry() +
-                ",  цвет - " + train.getColor() +
-                ",  скорость передвижения " +
-                train.getMaxSpeed() +
-                ", цена поездки - " + train.getPriceOfTheTrip() +
-                ", время поездки - " + train.getTimeOfTheTrip() +
-                ",станция отправления - " + train.getDepartureStation() +
-                ", конечная остановка - " + train.getFinalStop() +
-                ", количество вагонов - " + train.getNumberOfWagons() +
-                ", тип топлива - " + train.getFuelType());
+    @Override
+    public void printInfo() {
+        System.out.println(getBrand() + " " + getModel() +
+                ", год выпуска - " + getYear() +
+                ", сборка -  " + getCountry() +
+                ",  цвет - " + getColor() +
+                ",  скорость передвижения " + getMaxSpeed() +
+                ", цена поездки - " + getPriceOfTheTrip() +
+                ", время поездки - " + getTimeOfTheTrip() +
+                ",станция отправления - " + getDepartureStation() +
+                ", конечная остановка - " + getFinalStop() +
+                ", количество вагонов - " + getNumberOfWagons() +
+                ", тип топлива - " + getFuelType());
     }
 
-}
+    }
+
+
 
 
 
