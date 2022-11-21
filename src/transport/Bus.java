@@ -4,26 +4,68 @@ import lombok.Getter;
 import lombok.Setter;
 
 
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
-
 @Getter
 @Setter
-public class Bus extends Transport implements Competing {
 
-    public Bus(String brand, String model, double engineVolume) {
+public class Bus extends Transport implements Competing {
+    private Capacity capacity;
+
+
+    public Bus(String brand,
+               String model,
+               double engineVolume,
+               Capacity capacity){
         super(brand, model, engineVolume);
+        this.brand = Objects.requireNonNullElse(brand, "default");
+        this.model = Objects.requireNonNullElse(model, "default");
+        if (engineVolume <= 0) {
+            this.engineVolume = 5.5;
+        } else {
+            this.engineVolume = engineVolume;
+        }
+        this.capacity = capacity;
 
     }
+
+
+    public Capacity getCapacity() {
+        return capacity;
+    }
+
+
+    @Override
+    public void refill() {
+
+    }
+
 
     @Override
     public void startMoving() {
         System.out.printf("Автобус %s %s начни движение", this.getBrand(), this.getModel());
     }
 
+
+
+
+
     @Override
     public void finishMoving() {
         System.out.printf("Автобус %s %s закончи движение", this.getBrand(), this.getModel());
     }
+
+    @Override
+    public void printType() {
+        if(capacity==null){
+            System.out.println("Данных недостаточно");
+        }else {
+
+            System.out.println("вместимость автобуса - " +  getBrand() + " "  + getModel()  + " "  + " от " +
+                    capacity.getFrom() + " до " + capacity.getTo() + " мест");
+        }
+    }
+
 
     @Override
     public void pitStop() {

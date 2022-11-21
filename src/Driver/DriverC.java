@@ -1,13 +1,12 @@
 package Driver;
 
+
 import lombok.Getter;
 import lombok.Setter;
-
 import transport.Truck;
 
 @Getter
 @Setter
-
 public class DriverC extends Driver<Truck>{
     public DriverC(String fullName, String driverscategory, int drivingExperience, String car) {
         super(fullName, "C", drivingExperience, car);
@@ -36,4 +35,7 @@ public class DriverC extends Driver<Truck>{
         System.out.println("Водитель " + getFullName() + "управляет грузовым автомобилем " + transport.getBrand() +
                 " и будет участвовать в заезде.");
     }
+
+
+
 }

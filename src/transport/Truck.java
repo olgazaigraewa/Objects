@@ -1,5 +1,6 @@
 package transport;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,30 +8,59 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @Getter
 @Setter
-public class Truck extends Transport implements Competing{
+public class Truck extends Transport implements Competing {
+    private Tonnage tonnage;
 
-
-    public Truck(String brand, String model, double engineVolume) {
+    public Truck(String brand,
+                 String model,
+                 double engineVolume,
+                 Tonnage tonnage) {
         super(brand, model, engineVolume);
+        this.tonnage = tonnage;
+
+    }
+
+    public Tonnage getTonnage() {
+        return tonnage;
+    }
+
+    public void setTonnage(Tonnage tonnage) {
+        this.tonnage = tonnage;
     }
 
     @Override
+    public void refill() {
+
+    }
+
+
+    @Override
     public void startMoving() {
-        System.out.printf("Грузовик %s %s начни движение", this.getBrand(),this.getModel());
-           }
+        System.out.printf("Грузовик %s %s начни движение", this.getBrand(), this.getModel());
+    }
 
     @Override
     public void finishMoving() {
-        System.out.printf("Грузовик %s %s закончи движение", this.getBrand(),this.getModel());
-          }
+        System.out.printf("Грузовик %s %s закончи движение", this.getBrand(), this.getModel());
+    }
 
+    @Override
+    public void printType() {
+        if(tonnage==null){
+            System.out.println("Данных недостаточно");
+        }else {
+            String from = tonnage.getFrom()==null? " " : " от " + tonnage.getFrom()  + " " ;
+            String to = tonnage.getTo() ==null? " " : " до " + tonnage.getTo();
+            System.out.println("грузоподъемность авто - " + getBrand() + " "  +  getModel() +  from   + to + " т.");
+        }
 
+    }
 
 
     @Override
     public void pitStop() {
-        System.out.printf("Грузовик! %s %s Пит-стоп! ", this.getBrand(),this.getModel());
-         }
+        System.out.printf("Грузовик! %s %s Пит-стоп! ", this.getBrand(), this.getModel());
+    }
 
     @Override
     public float bestLapTime() {
@@ -41,9 +71,10 @@ public class Truck extends Transport implements Competing{
     public float maximumSpeed() {
         return ThreadLocalRandom.current().nextInt(1, 150);
     }
+
     @Override
     public void printInfo() {
-        System.out.println ("Грузовик - " + getBrand()+
+        System.out.println("Грузовик - " + getBrand() +
                 ", модель - " + getModel() +
                 ", объем двигателя - " + getEngineVolume() + " л.");
     }
@@ -86,7 +117,7 @@ public class Truck extends Transport implements Competing{
 //        if (!(o instanceof Trucks)) return false;
 //        Trucks trucks = (Trucks) o;
 //        return Double.compare(trucks.getEngineVolume(), getEngineVolume()) == 0 && getFuelType().equals(trucks.getFuelType());
- //   }
+//   }
 
 //    @Override
 //    public int hashCode() {

@@ -3,6 +3,7 @@ package Driver;
 import lombok.Getter;
 import lombok.Setter;
 import transport.Car;
+import transport.Transport;
 
 @Getter
 @Setter
@@ -37,4 +38,10 @@ public class DriverB extends Driver<Car>{
         System.out.println("Водитель " + getFullName() + "управляет легковым автомобилем " + transport.getBrand() +
                 " и будет участвовать в заезде.");
     }
-}
+
+
+
+    }
+
+
+

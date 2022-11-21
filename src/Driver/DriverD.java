@@ -4,11 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import transport.Bus;
 
+
 @Getter
 @Setter
-public class DriverD extends Driver<Bus>{
+public class DriverD extends Driver<Bus> {
     public DriverD(String fullName, String driverscategory, int drivingExperience, String car) {
-        super(fullName, "D" , drivingExperience, car);
+        super(fullName, "D", drivingExperience, car);
     }
 
     @Override
@@ -26,7 +27,7 @@ public class DriverD extends Driver<Bus>{
     @Override
     public void refill() {
         System.out.printf("Водителю автобуса %s заправить автомобиль %s %s", this.getFullName(),
-                this.getCar().getBrand(),this.getCar().getModel());
+                this.getCar().getBrand(), this.getCar().getModel());
     }
 
     @Override
@@ -36,5 +37,11 @@ public class DriverD extends Driver<Bus>{
     }
 
 
+}
 
-    }
+
+
+
+
+
+
