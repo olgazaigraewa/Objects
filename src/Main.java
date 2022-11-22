@@ -2,8 +2,10 @@
 import Driver.DriverB;
 import Driver.DriverC;
 import Driver.DriverD;
+import org.jetbrains.annotations.NotNull;
 import transport.*;
 
+@NotNull
 public class Main {
 
     public static void main(String[] args) {
@@ -42,7 +44,7 @@ public class Main {
         DriverD driverD = new DriverD("Денисов Игорь Иванович ", "D", 17, " man ");
 
         driverB.getIn(new Car(audi.getBrand(), audi.getModel(), audi.getEngineVolume(), audi.getTypeBody()));
-        driverC.getIn(new Truck(ford.getBrand(), ford.getModel(), ford.getEngineVolume(),ford.getTonnage()));
+        driverC.getIn(new Truck(ford.getBrand(), ford.getModel(), ford.getEngineVolume(), ford.getTonnage()));
         driverD.getIn(new Bus(man.getBrand(), man.getModel(), man.getEngineVolume(), man.getCapacity()));
         System.out.println(" ");
 
@@ -54,25 +56,41 @@ public class Main {
         renault.printType();
         volvo.printType();
         man.printType();
+        System.out.println(" ");
 
+        service(mersedes, volvo, man, liaz, lada, audi, bmw, hyundai, ford, renault, daewoo, kamaz);
+    }
 
+    private static void service(Transport... transports) {
+        for (Transport transport : transports) {
+            if (!transport.service()) {
+                try {
+                    throw new RuntimeException(" Автомобиль " + transport.getBrand() + " " + transport.getModel() + " не прошёл диагностику.");
+                } catch (RuntimeException e) {
+                    System.out.println(e.getMessage());
+                }
+
+            }
+        }
     }
 }
+
+
 //        int currentYear = 2022;
 
-    //       Human maksim = new Human(null, "Минск", 1988, "бренд-менеджер");
-    //       maksim.hello();
+//       Human maksim = new Human(null, "Минск", 1988, "бренд-менеджер");
+//       maksim.hello();
 
-    //       Human anya = new Human("Аня", null, 1993, " методист образовательных программ");
-    //       anya.hello();
+//       Human anya = new Human("Аня", null, 1993, " методист образовательных программ");
+//       anya.hello();
 
-    //       Human katya = new Human("Катя", "Калининград", 0, " продакт-менеджер");katya.hello();
+//       Human katya = new Human("Катя", "Калининград", 0, " продакт-менеджер");katya.hello();
 
 //        Human artem = new Human("Артём", "Москва", 1995, null);
-    //       artem.hello();
+//       artem.hello();
 
 //        Human wladimir = new Human("Владимир", "Казань", currentYear - 21, "сейчас нигде не работает");
-    //       wladimir.hello();
+//       wladimir.hello();
 //        System.out.println(" ");
 
 //        Flower rosa = new Flower(null, "Голландия", 35.59, 0);

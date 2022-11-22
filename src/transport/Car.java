@@ -13,10 +13,9 @@ public class Car extends Transport implements Competing {
     public Car(String brand,
                String model,
                double engineVolume,
-               TypeBody typeBody)
-               {
+               TypeBody typeBody) {
         super(brand, model, engineVolume);
-        this.typeBody=typeBody;
+        this.typeBody = typeBody;
 
     }
 
@@ -31,28 +30,33 @@ public class Car extends Transport implements Competing {
 
     @Override
     public void startMoving() {
-        System.out.printf("Автомобиль %s %s начни движение", this.getBrand(),this.getModel());
-           }
+        System.out.printf("Автомобиль %s %s начни движение", this.getBrand(), this.getModel());
+    }
 
     @Override
     public void finishMoving() {
-        System.out.printf("Автомобиль %s %s закончи движение", this.getBrand(),this.getModel());
-         }
+        System.out.printf("Автомобиль %s %s закончи движение", this.getBrand(), this.getModel());
+    }
 
     @Override
     public void printType() {
-        if (typeBody==null){
+        if (typeBody == null) {
             System.out.println("Данных недостаточно");
-        }else {
-            System.out.println( " тип кузова авто  " + getBrand() + " " + getModel() + " - " + typeBody);
+        } else {
+            System.out.println(" тип кузова авто  " + getBrand() + " " + getModel() + " - " + typeBody);
         }
 
     }
 
     @Override
+    public boolean service() {
+        return Math.random()> 0.5;
+        }
+
+    @Override
     public void pitStop() {
-        System.out.printf("Автомобиль! %s %s Пит-стоп! ", this.getBrand(),this.getModel());
-          }
+        System.out.printf("Автомобиль! %s %s Пит-стоп! ", this.getBrand(), this.getModel());
+    }
 
     @Override
     public float bestLapTime() {
@@ -63,15 +67,17 @@ public class Car extends Transport implements Competing {
     public float maximumSpeed() {
         return ThreadLocalRandom.current().nextInt(1, 250);
     }
+
     @Override
     public void printInfo() {
-        System.out.println ("Автомобиль - " + getBrand()+
+        System.out.println("Автомобиль - " + getBrand() +
                 ", модель - " + getModel() +
                 ", объем двигателя - " + getEngineVolume() + " л.");
 
     }
-
 }
+
+
 
 
 

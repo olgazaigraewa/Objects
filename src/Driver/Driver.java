@@ -13,10 +13,17 @@ public abstract class Driver<T extends Transport > {
 
     public Driver(String fullName, String driverscategory, int drivingExperience, String car) {
         this.fullName = fullName;
-        this.driverscategory = driverscategory;
+        setDriverscategory(driverscategory);
         this.drivingExperience = drivingExperience;
 
 
+    }
+
+    public void setDriverscategory(String driverscategory) {
+        if (driverscategory==null){
+            throw new IllegalArgumentException("Необходимо указать категорию прав!");
+        }
+        this.driverscategory = driverscategory;
     }
 
     public abstract void startMoving();
