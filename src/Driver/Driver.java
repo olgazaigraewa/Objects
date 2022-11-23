@@ -41,11 +41,10 @@ public abstract class Driver<T extends Transport > {
 
     @Override
     public String toString() {
-         return String.format("Водитель %s управляет автомобилем %s %s и будет участвовать в заезде",
-                this.fullName, this.car.getBrand(), this.car.getModel());
+        return  fullName +   ", категория - " + driverscategory + ", стаж вождения - " + drivingExperience;
+
+
     }
-
-
 }
 
 

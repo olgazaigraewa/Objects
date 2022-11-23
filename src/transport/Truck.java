@@ -61,6 +61,11 @@ public class Truck extends Transport implements Competing {
     }
 
     @Override
+    public void repair() {
+        System.out.println(" Грузовик " + getBrand() + " " + getModel() + "  починен!");
+    }
+
+    @Override
     public void pitStop() {
         System.out.printf("Грузовик! %s %s Пит-стоп! ", this.getBrand(), this.getModel());
     }
