@@ -3,6 +3,9 @@ package Driver;
 import lombok.Getter;
 import lombok.Setter;
 import transport.Transport;
+
+import java.util.Objects;
+
 @Getter
 @Setter
 public abstract class Driver<T extends Transport > {
@@ -44,6 +47,20 @@ public abstract class Driver<T extends Transport > {
         return  fullName +   ", категория - " + driverscategory + ", стаж вождения - " + drivingExperience;
 
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o==null|| getClass()!= o.getClass()) return false;
+        Driver<?> driver = (Driver<?>) o;
+        return Objects.equals(fullName, driver.fullName) &&
+                Objects.equals(driverscategory, driver.driverscategory);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fullName, driverscategory);
     }
 }
 

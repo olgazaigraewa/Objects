@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import transport.*;
 
 import java.util.List;
+import java.util.Set;
 
 @NotNull
 public class Main {
@@ -86,7 +87,10 @@ public class Main {
         System.out.println(" ");
         Bus bus = new Bus("Mersedes", "Citaro", 12, Capacity.SUPER_LARGE);
         bus.addDriverD(new DriverD("Павлов Аркадий Глебович", "D", 13, "mersedes"));
+        bus.addDriverD(new DriverD("Павлов Аркадий Глебович", "D", 13, "mersedes"));
         bus.addMechanic(gleb);
+        bus.addMechanic(gleb);
+        bus.addSponsor(condor);
         bus.addSponsor(condor);
         System.out.println(" ");
         Mechanic<Bus> zurab = new Mechanic<Bus>("Зураб", "Зурабов", "Pirelli");
@@ -124,6 +128,13 @@ public class Main {
         service(bus, bus1, bus2, bus3, car, car1, car2, car3,truck, truck1, truck2, truck3);
         List<Transport> transports = List.of( car, car1, car2, car3, bus, bus1, bus2, bus3,
                 truck, truck1, truck2, truck3);
+        Set<Transport>transports1 = Set.of(car, car1, car2, car3, bus, bus1, bus2, bus3,
+                truck, truck1, truck2, truck3);
+
+
+
+
+
 
         ServiceStation serviceStation = new ServiceStation();
         serviceStation.addCar(car);

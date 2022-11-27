@@ -2,6 +2,8 @@ package transport;
 
 import lombok.Getter;
 
+import java.util.Objects;
+
 @Getter
 public class Sponsor {
 
@@ -20,5 +22,18 @@ public class Sponsor {
     public String toString() {
         return  name +  ", сумма поддержки - " + amount;
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o==null|| getClass()!= o.getClass()) return false;
+        Sponsor sponsor = (Sponsor) o;
+        return Objects.equals(name, sponsor.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }
